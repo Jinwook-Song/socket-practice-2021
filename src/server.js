@@ -18,6 +18,12 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('🚀 user disconnected:', id);
   });
+
+  // chat message
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+    io.emit('chat message', msg); // emit event to everyone
+  });
 });
 
 server.listen(port, () => {
