@@ -8,8 +8,12 @@ const io = new Server(server);
 
 const port = 3000;
 
+// public 경로의 파일들을 static 경로로 접근하여 사용할 수 있다.
+// static은 임의의 경로로 설정하여 사용이 가능
+app.use('/static', express.static(__dirname + '/public'));
+
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 io.on('connection', (socket) => {
