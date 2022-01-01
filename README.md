@@ -1,4 +1,4 @@
-# Practice Socket.io
+# Socket.io Tutorial
 
 - Setup
   - npm init
@@ -166,4 +166,41 @@
       window.scrollTo(0, document.body.scrollHeight);
     });
   </script>
+  ```
+- Refactoring
+  html을 분리하기위해 refactoring을 하였다.
+  ```bash
+  // 트리구조
+
+  ├── public
+  │   ├── index.js
+  │   └── styles.css
+  ├── server.js
+  └── views
+      └── index.html
+  ```
+  ```jsx
+  // server.js
+
+  // public 경로의 파일들을 static 경로로 접근하여 사용할 수 있다.
+  // static은 임의의 경로로 설정하여 사용이 가능
+  app.use('/static', express.static(__dirname + '/public'));
+  ```
+  ```html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Socket.IO chat</title>
+      <link rel="stylesheet" href="/static/styles.css" />
+    </head>
+    <body>
+      <ul id="messages"></ul>
+      <form id="form" action="">
+        <input id="input" autocomplete="off" /><button>Send</button>
+      </form>
+      <!-- Takes to load the socket.io-client, which exposes an io global (and the endpoint GET /socket.io/socket.io.js), and then connect. -->
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="/static/index.js"></script>
+    </body>
+  </html>
   ```
